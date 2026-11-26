@@ -1,6 +1,6 @@
 # Scraper de publicações do Instagram (CazéTV)
 
-Coletor de publicações públicas do perfil [@cazetv](https://www.instagram.com/cazetv/) no Instagram, desenvolvido para a monografia *Análise exploratória de dados em publicações no Instagram no período da Copa do Mundo 2026* (Engenharia de Computação, UFES).
+Coletor de publicações públicas no Instagram, desenvolvido para a monografia *Análise exploratória de dados em publicações no Instagram no período da Copa do Mundo 2026* (Engenharia de Computação, UFES).
 
 O script percorre o feed do perfil dentro de uma janela de datas, abre cada publicação em uma aba nova, extrai os dados públicos e grava tudo em um arquivo CSV. A coleta pode ser interrompida e retomada sem perder o progresso.
 
@@ -61,12 +61,9 @@ O Instagram informa as datas em UTC. O script converte para o horário de Brasí
 ### 2. Perfil do Chrome
 
 ```python
-CHROME_USER_DATA_DIR = r"C:\Users\danie\ChromeSeleniumProfile"
-CHROME_PROFILE_DIRECTORY = "Profile 2"
+CHROME_USER_DATA_DIR = r"..\ChromeSeleniumProfile"
+CHROME_PROFILE_DIRECTORY = "Profile (com Instagram logado)"
 ```
-
-Esses caminhos são do computador do autor. **Troque pelos seus.** O perfil dedicado mantém o login salvo entre execuções. Para descobrir os caminhos, abra `chrome://version` no Chrome:
-
 - `CHROME_USER_DATA_DIR` é a pasta `User Data` (tudo que vem antes do nome do perfil);
 - `CHROME_PROFILE_DIRECTORY` é só o nome da pasta do perfil, por exemplo `Profile 2`.
 
@@ -113,7 +110,7 @@ Depois do posicionamento, os dois modos usam exatamente a mesma coleta.
 
 ## Dados gerados
 
-### `cazetv_posts.csv`
+### `database.csv`
 
 Codificação UTF-8 com BOM (abre corretamente no Excel). Uma linha por publicação, ordenadas da mais recente para a mais antiga.
 
@@ -150,7 +147,7 @@ Valores abreviados do Instagram (como `12,3 mil` e `1,2M`) são convertidos para
 - **Posts fixados:** o fim da coleta só é declarado depois de 3 posts consecutivos anteriores à janela, evitando que um post fixado no topo do perfil interrompa a coleta cedo demais.
 - **Auditoria:** ao final, o log compara o período realmente coletado com o esperado e lista as URLs abandonadas, que podem ser coletadas depois.
 
-> **Nova coleta com outra janela:** o script sempre recarrega o CSV e o checkpoint existentes. Para começar uma coleta do zero ou com outro período, mova ou apague `cazetv_posts.csv` e `checkpoint.json` antes de rodar. Caso contrário, os novos posts serão somados aos antigos.
+> **Nova coleta com outra janela:** o script sempre recarrega o CSV e o checkpoint existentes. Para começar uma coleta do zero ou com outro período, mova ou apague `database.csv` e `checkpoint.json` antes de rodar. Caso contrário, os novos posts serão somados aos antigos.
 
 ## Limitações conhecidas
 
@@ -180,7 +177,7 @@ Leia com atenção antes de usar.
 ├── requirements.txt    # dependências
 ├── README.md
 │
-├── cazetv_posts.csv    # gerado: dados coletados
+├── database.csv    # gerado: dados coletados
 ├── checkpoint.json     # gerado: progresso da coleta
 └── scraper.log         # gerado: log de execução
 ```
