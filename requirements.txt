@@ -1,0 +1,11 @@
+# Dependências do scraper (script_v2.py)
+# Python 3.9 ou superior.
+#
+# selenium >= 4.6 inclui o Selenium Manager, que baixa o ChromeDriver
+# compatível com o seu Chrome automaticamente (não é preciso instalá-lo à mão).
+# Testado com selenium 4.54 e Python 3.12.
+selenium>=4.6,<5
+
+# O script importa urllib3.exceptions diretamente. O urllib3 já vem como
+# dependência do selenium; fica declarado aqui por ser usado no código.
+urllib3>=1.26
