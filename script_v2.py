@@ -1,7 +1,7 @@
 """
 script.py
 
-Coleta publicações públicas do perfil @cazetv no Instagram dentro de uma
+Coleta publicações públicas do perfil no Instagram dentro de uma
 janela temporal (TARGET_START a TARGET_END) e grava os dados em um CSV.
 
 MODOS DE BUSCA (escolhidos na linha de comando com --modo)
@@ -42,7 +42,7 @@ AVISOS
   - Respeite os Termos de Uso do Instagram e as normas éticas da sua
     instituição (dados públicos, sem dados pessoais de terceiros).
 
-CSV GERADO (cazetv_posts.csv)
+CSV GERADO (database.csv)
     post_id, url, post_type, media_count, likes, comments, caption,
     date, time, datetime_iso, collected_at
 """
@@ -78,7 +78,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 # CONFIGURAÇÃO
 # ==========================================================================
 
-PROFILE_USERNAME = "cazetv"
+PROFILE_USERNAME = "@perfil"
 PROFILE_URL = f"https://www.instagram.com/{PROFILE_USERNAME}/"
 
 # Fuso da pesquisa. O Instagram informa as datas em UTC; convertemos para o
@@ -91,7 +91,7 @@ TARGET_START = datetime(2026, 11, 17, 10, 59, 59, tzinfo=TIMEZONE)
 TARGET_END = datetime(2026, 11, 17, 12, 59, 59, tzinfo=TIMEZONE)
 
 # Arquivos de saída
-OUTPUT_CSV = "cazetv_posts.csv"
+OUTPUT_CSV = "database.csv"
 CHECKPOINT_FILE = "checkpoint.json"
 LOG_FILE = "scraper.log"
 
@@ -100,8 +100,8 @@ LOG_FILE = "scraper.log"
 # Descubra os caminhos em chrome://version:
 #   CHROME_USER_DATA_DIR = pasta "User Data" (tudo ANTES de "Profile 2")
 #   CHROME_PROFILE_DIRECTORY = só o nome da pasta, ex.: "Profile 2"
-CHROME_USER_DATA_DIR: Optional[str] = r"C:\Users\danie\ChromeSeleniumProfile"
-CHROME_PROFILE_DIRECTORY: Optional[str] = "Profile 2"
+CHROME_USER_DATA_DIR: Optional[str] = r"...\ChromeSeleniumProfile"
+CHROME_PROFILE_DIRECTORY: Optional[str] = "Profile"
 
 # Tempos (segundos)
 ELEMENT_TIMEOUT = 15            # espera por um elemento aparecer na página
@@ -151,7 +151,7 @@ logging.basicConfig(
         logging.StreamHandler(sys.stdout),
     ],
 )
-log = logging.getLogger("cazetv_scraper")
+log = logging.getLogger("scraper")
 
 
 class BrowserUnresponsiveError(RuntimeError):
