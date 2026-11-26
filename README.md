@@ -1,4 +1,4 @@
-# Scraper de publicações do Instagram (CazéTV)
+# Scraper de publicações do Instagram
 
 Coletor de publicações públicas no Instagram, desenvolvido para a monografia *Análise exploratória de dados em publicações no Instagram no período da Copa do Mundo 2026* (Engenharia de Computação, UFES).
 
